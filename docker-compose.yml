@@ -1,0 +1,70 @@
+services:
+  #Tên service
+    #image: Tên_image_cần_pull_về
+    #Nếu không pull image thì ta có thể tự build custom qua Dockerfile (ví dụ thằng php bên dưới): build: path_to_dockerfile
+    #container_name: đặt tên cho container
+    #ports: host_port:container_port
+    #volumes: host_dir:container_dir (ánh xạ dữ liệu từ host vào container host_path:container_path:[ro (read-only)/rw (read-write)])
+    #         Nếu container_dir không tồn tại, docker sẽ tự tạo ra thư mục đó cho ta. Nếu đã tồn tại thì nó sẽ ghi đè nội dung file.
+    #depends_on: chờ service được chỉ định khởi động xong rồi nó mới khởi động
+    #networks: khởi tạo mạng ảo kết nối các container với nhau (DNS entry = tên service)
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-container
+    ports:
+      - "80:80"
+    volumes:
+      - ./php:/var/www/html
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - php
+    networks:
+      - internal
+
+  php:
+    build: ./php #Docker sẽ tìm đến thư mục php được chỉ định để tìm xem có Dockerfile không --> build image dựa trên chỉ dẫn
+                 # --> khởi chạy container dựa trên image vừa build được.
+    container_name: php-fpm-container
+    volumes:
+      - ./php:/var/www/html
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+    networks:
+      - internal
+
+  db:
+    image: mysql/mysql-server:latest
+    container_name: mysql-container
+    environment: #tạo root password, tạo database và user mới.
+      MYSQL_ROOT_PASSWORD: asd@12345
+      MYSQL_DATABASE: dbtest
+      MYSQL_USER: testusr
+      MYSQL_PASSWORD: asd@123
+    ports:
+      - "3306:3306"
+    networks:
+      - internal
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin-container
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db #phải trùng với "Tên service" của mysql-server bên trên (db)
+      PMA_PORT: 3306 #port mà container db sử dụng
+      PMA_USER: testusr #đăng nhập phpmyadmin với user/pass đã tạo ở trên db
+      PMA_PASSWORD: asd@123
+    depends_on:
+      - db
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+
+

@@ -1,0 +1,79 @@
+/*
+Theme Name: Flatsome Child
+Description: This is a child theme for Flatsome Theme
+Author: UX Themes
+Template: flatsome
+Version: 3.0
+*/
+
+/*************** ADD CUSTOM CSS HERE.   ***************/
+@font-face {
+ font-family: VNF-Futura Regular;
+ src: url(fonts/SVN-Gilroy-Light.otf);
+ font-weight: normal;
+ }
+
+@font-face {
+  font-family: "UTM Alter Gothic";
+  src: url("fonts/UTMAlterGothic.woff2") format("woff2"),
+    url("fonts/UTMAlterGothic.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.section-danh-muc .banner h3 strong{
+	    background: white;
+    color: black;
+    padding: 9px 23px
+}
+.div-no-padding{
+	padding-bottom: 0px !important;
+}
+.product-small .product-title a{
+  font-family: "UTM Alter Gothic" !important;
+}
+body{font-family:  "VNF-Futura Regular",  sans-serif !important}
+.nav > li > a {font-family:  "VNF-Futura Regular", sans-serif !important;}
+h1,h2,h3,h4,h5,h6, .heading-font{font-family: "VNF-Futura Regular", sans-serif !important;}
+.alt-font{font-family: "VNF-Futura Regular", sans-serif !important;}
+.header-main{
+	border-bottom: 0.5px solid #ccc;
+}
+.header-main .nav > li > a {
+    line-height: 16px;
+    font-size: 16px;
+}
+.absolute-footer{
+	display: none;
+}
+.section-footer{
+	    border-top: 0.5px solid #ccc;
+}
+#billing_address_1_field{
+	width:100% !important;
+}
+.product-small .product-title{
+	font-size: 20px;
+}
+.product-small .box-text .product-title a{
+	border-bottom: 3px solid transparent;
+}
+.product-small .box-text:hover .product-title a{
+	border-bottom: 3px solid #b49d65;
+}
+.woo-variation-swatches-stylesheet-enabled.woo-variation-swatches-style-squared .variable-items-wrapper .variable-item.button-variable-item {
+    width: auto;
+    border-radius: 0px !important;
+}
+.woo-variation-swatches-style-squared .button-variable-item {
+    min-width: 38px !important;
+}
+
+.variable-item:not(.radio-variable-item) {
+    width: 38px !important;
+    height: 38px !important;
+}
+@media only screen and (max-width: 48em) {
+/*************** ADD MOBILE ONLY CSS HERE  ***************/
+
+
+}
